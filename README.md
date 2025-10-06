@@ -16,8 +16,11 @@
 </p>
 </div>
 
-## 🌟 Highlights
+<p align="center">
+  <img src="images/conf_matrix_latte.png" alt="LATTE conf matrix" />
+</p>
 
+## 🌟 Highlights
 - 🔬 **Detection of generated images**: A novel approach for detecting generated images by modeling the evolution of latent representations across the generative denoising process.
 - 🌀 **Latent Trajectory Modeling** — Extracts multiple diffusion latents from Stable Diffusion into a trajectory sequence.  
 - 🔗 **Latent–Visual Fusion** — Aligns the extracted latent features with visual semantics using ConvNeXt or CLIP vision encoders.  
@@ -31,7 +34,7 @@ We construct the LATTE sequence by performing a single-step reconstruction for a
 
 It encompasses two stages: (1) Latent–Visual Fusion, where the LATTE is fused with visual semantics through stacks of L cross-attention layers, and (2) Latent-Visual Classifier for average aggregation and output prediction.
 <p align="center">
-  <img src="images/latte_architecture.jpg" alt="LATTE Architecture" width="700"/>
+  <img src="images/latte_architecture.png" alt="LATTE Architecture" width="700"/>
 </p>
 
 ## 🗂️ Project Structure
