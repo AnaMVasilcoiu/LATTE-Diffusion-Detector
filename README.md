@@ -1,18 +1,40 @@
-# LATTE: Latent Trajectory Embedding for Diffusion-Generated Image Detection
+<div align="center">
+<br>
+<h1>🧋LATTE: Latent Trajectory Embedding for Diffusion-Generated Image Detection</h1>
 
-LATTE is a novel framework for detecting diffusion-generated images by modeling the evolution of latent representations across the generative denoising process. This project introduces a two-stage architecture that refines and aggregates latent trajectories, achieving robust and generalizable detection performance across multiple diffusion models and datasets.
+[Ana Vasilcoiu](https://scholar.google.com/citations?user=KdfvSf8AAAAJ&hl=ro)* [Ivona Najdenkoska](https://ivonajdenkoska.github.io/)*, [Zeno Geradts](https://www.uva.nl/en/profile/g/e/z.j.m.h.geradts/z.j.m.h.geradts.html), [Marcel Worring](https://staff.fnwi.uva.nl/m.worring/)
 
-<img src="images/latte_extraction.png" alt="LATTE Extraction" width="700"/>
+<sup>1</sup>University of Amsterdam, <sup>2</sup>Netherlands Forensic Institute (NFI)
 
-<img src="images/latte_architecture.jpg" alt="LATTE Architecture" width="700"/>
+<p align="center">
+  <a href='https://arxiv.org/abs/2507.03054'>
+    <img src='https://img.shields.io/badge/Arxiv-2406.19435-A42C25?style=flat&logo=arXiv&logoColor=A42C25'>
+  </a>
+  <a href='https://arxiv.org/pdf/2507.03054'>
+    <img src='https://img.shields.io/badge/Paper-PDF-yellow?style=flat&logo=arXiv&logoColor=yellow'>
+  </a>
+</p>
+</div>
 
-## Key contributions
-- **Latent Trajectory Representation**: Captures multiple latent states along the denoising trajectory of diffusion models using Stable Diffusion.
-- **Cross-Attention Refinement**: Aligns each latent with image semantics from ConvNeXt or CLIP encoders via transformer decoders.
-- **Unified Classification**: Aggregates refined latents (via average, weighted, or CLS pooling) for final prediction.
-- **Robust and Generalizable**: Outperforms state-of-the-art methods (e.g., LaRE, DIRE) on GenImage and Diffusion Forensics datasets.
+## 🌟 Highlights
 
-## Project Structure
+- 🔬 **Detection of generated images**: A novel approach for detecting generated images by modeling the evolution of latent representations across the generative denoising process.
+- 🌀 **Latent Trajectory Modeling** — Extracts multiple diffusion latents from Stable Diffusion into a trajectory sequence.  
+- 🔗 **Latent–Visual Fusion** — Aligns the extracted latent features with visual semantics using ConvNeXt or CLIP vision encoders.  
+- 🧠 **Robust & Generalizable** — Outperforms **AIDE** and **LaRE** on **GenImage**, **Chameleon** and **Diffusion Forensics**, demonstrating both strong cross-generator and cross-domain performance.  
+
+## 🧩 Method Details 
+We construct the LATTE sequence by performing a single-step reconstruction for a selection of timesteps throughout the whole trajectory.
+<p align="center">
+  <img src="images/latte_extraction.png" alt="LATTE Extraction" width="700"/>
+</p>
+
+It encompasses two stages: (1) Latent–Visual Fusion, where the LATTE is fused with visual semantics through stacks of L cross-attention layers, and (2) Latent-Visual Classifier for average aggregation and output prediction.
+<p align="center">
+  <img src="images/latte_architecture.jpg" alt="LATTE Architecture" width="700"/>
+</p>
+
+## 🗂️ Project Structure
 ```
 ├── images
 ├──── # Folder with image resources
@@ -29,7 +51,7 @@ LATTE is a novel framework for detecting diffusion-generated images by modeling 
 └── README.md                    # You're here!
 ```
 
-## Setup and Installation
+## ⚙️ Setup and Installation
 
 ### Requirements
 - Python 3.8+
@@ -40,7 +62,7 @@ The environment containing the rest of the required packages can be installed vi
 conda env create -f environment.yml
 ```
 
-## How it works
+## 🚀 How it works
 
 ### 1. Latent Extraction
 Use extract_latte.py to preprocess and extract latent sequences for real and fake images:
@@ -81,31 +103,37 @@ python robustness.py \
   --model_type "TemporalCLIPLatentClassifier"
 ```
 
-## Benchmarks
+## 📊 Benchmarks
 
-### **GenImage:\***
+### **GenImage**
+Complete pairwise evaluation of detection performance across all 8 generators in the GenImage dataset. Each subplot corresponds to one detector - DIRE (left; baseline), LaRE (center; baseline), and LATTE (right; proposed) - and shows the accuracy(\%) when training on the subset listed on the vertical axis and testing on the subset listed along the horizontal axis. Row- and column-averages summarize each method's cross-model generalization capabilities.
 
 <img src="images/acc_comparison.png" alt="Benchmarks" width="800"/>
 
-\*Complete pairwise evaluation of detection performance across all 8 generators in the GenImage dataset. Each subplot corresponds to one detector - DIRE (left; baseline), LaRE (center; baseline), and LATTE (right; proposed) - and shows the accuracy(\%) when training on the subset listed on the vertical axis and testing on the subset listed along the horizontal axis. Row- and column-averages summarize each method's cross-model generalization capabilities.
+### **Chameleon**
+Results on the Chameleon benchmark highlight both the robustness of our approach and its effectiveness in generalizing across diverse visual domains.
 
-
-### **DiffusionForensics:\*** 
-| Subset        | LaRE (%)  |  LATTE (%) |
+| Training set  | AIDE (%)  |  LATTE (%) |
 |---------------|-----------|------------|
-| Bedroom       | 69.5      |  **85.7**  |
-| Celeba        | 90.0      |  **91.1**  |
-| Imagenet      | 89.9      |  **93.9**  |
+| SDv1.4        |   62.6    |  **63.8**  |
+| GenImage      |   65.8    |  **68.3**  |
 
-\*Results of a cross-domain generalization experiment where both models have been trained on the SDv1.4 subset of GenImage and tested on all generator subsets across the 3 dataset subsets of DiffusionForensics.
+### **DiffusionForensics**
+Results of a cross-domain generalization experiment where both models have been trained on the SDv1.4 subset of GenImage and tested on all generator subsets across the 3 dataset subsets of DiffusionForensics.
 
-## Ablation Highlights
-- **Separate vs. Stacked Refinement**: Separate improves performance by preserving timestep specificity.
-- **Aggregation**: Average pooling outperforms weighted and CLS-based approaches.
-- **Backbones**: ConvNeXt outperforms CLIP ViT-L/14 on generalization.
-- **Fine-tuning**: Essential for visual-latent alignment; prompt tuning underperforms.
-- **Perturbation Robustness**: LATTE is more resilient to JPEG, noise, cropping, and blur than prior methods.
+| Subset        | LaRE (%)  |  AIDE (%)  |  LATTE (%) |
+|---------------|-----------|------------|------------|
+| Bedroom       | 69.5      |    74.6    |  **85.7**  |
+| Celeba        | 90.0      |    75.5    |  **91.1**  |
+| Imagenet      | 89.9      |    76.2    |  **91.1**  |
 
-
-## Citation
-If you use LATTE in your research, please cite:
+## 📜 Citation 
+If you find the LATTE paper and code useful for your research and applications, please cite using this BibTeX:
+```
+@article{vasilcoiu2025latte,
+  title={LATTE: Latent Trajectory Embedding for Diffusion-Generated Image Detection},
+  author={Vasilcoiu, Ana and Najdenkoska, Ivona and Geradts, Zeno and Worring, Marcel},
+  journal={arXiv preprint arXiv:2507.03054},
+  year={2025}
+}
+```
