@@ -2,7 +2,7 @@
 <br>
 <h1>🧋LATTE: Latent Trajectory Embedding for Diffusion-Generated Image Detection</h1>
 
-[Ana Vasilcoiu](https://scholar.google.com/citations?user=KdfvSf8AAAAJ&hl=ro)* [Ivona Najdenkoska](https://ivonajdenkoska.github.io/)*, [Zeno Geradts](https://www.uva.nl/en/profile/g/e/z.j.m.h.geradts/z.j.m.h.geradts.html), [Marcel Worring](https://staff.fnwi.uva.nl/m.worring/)
+[Ana Vasilcoiu](https://scholar.google.com/citations?user=KdfvSf8AAAAJ&hl=ro)<sup>1</sup>* [Ivona Najdenkoska](https://ivonajdenkoska.github.io/)<sup>1,2</sup>*, [Zeno Geradts](https://www.uva.nl/en/profile/g/e/z.j.m.h.geradts/z.j.m.h.geradts.html)<sup>2</sup>, [Marcel Worring](https://staff.fnwi.uva.nl/m.worring/)<sup>1</sup>
 
 <sup>1</sup>University of Amsterdam, <sup>2</sup>Netherlands Forensic Institute (NFI)
 
@@ -21,9 +21,9 @@
 </p>
 
 ## 🌟 Highlights
-- 🔬 **Detection of generated images**: A novel approach for detecting generated images by modeling the evolution of latent representations across the generative denoising process.
+- 🔬 **Detection of generated images** — A novel approach for detecting generated images by modeling the evolution of latent representations across the generative denoising process.
 - 🌀 **Latent Trajectory Modeling** — Extracts multiple diffusion latents from Stable Diffusion into a trajectory sequence.  
-- 🔗 **Latent–Visual Fusion** — Aligns the extracted latent features with visual semantics using ConvNeXt or CLIP vision encoders.  
+- 🔗 **Latent–Visual Fusion** — Aligns the extracted latents with visual semantics using ConvNeXt/CLIP vision encoders.  
 - 🧠 **Robust & Generalizable** — Outperforms **AIDE** and **LaRE** on **GenImage**, **Chameleon** and **Diffusion Forensics**, demonstrating both strong cross-generator and cross-domain performance.  
 
 ## 🧩 Method Details 
