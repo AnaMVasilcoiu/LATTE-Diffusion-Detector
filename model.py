@@ -282,7 +282,7 @@ class IntraLatentTransformer(Module):
 # --------------------------------------------------
 
 # 4a) Stacked and Separate processing model
-class TemporalCLIPLatentClassifier(Module):
+class LatentTrajectoryClassifier(Module):
     def __init__(self, 
                  num_class=2,
                  clip_type="ViT-B/32",
@@ -301,7 +301,7 @@ class TemporalCLIPLatentClassifier(Module):
                  prompt_tuning=False,
                  qkNorm=False):
         """
-        Temporal CLIP Classifier that uses intermediate latents and cross-attends
+        Latent Trajectory Classifier that uses intermediate latents and cross-attends
         them to the (now 512-d) patch tokens.
         """
         super().__init__()
@@ -505,7 +505,7 @@ class TemporalCLIPLatentClassifier(Module):
             return logits, refined_query
 
 # 4b) CLS aggregation model
-class TemporalCLIPLatentClassifierSingleCLS(Module):
+class LatentTrajectoryClassifierSingleCLS(Module):
     def __init__(self, 
                  num_class=2,
                  clip_type="ViT-B/32",
@@ -519,7 +519,7 @@ class TemporalCLIPLatentClassifierSingleCLS(Module):
                  use_cls_token=True,
                  qkNorm=False):
         """
-        Temporal CLIP Latent Classifier variant that decodes each timestep's latent with a dedicated decoder, then prepends a single 
+        Latent Trajectory Classifier variant that decodes each timestep's latent with a dedicated decoder, then prepends a single 
         learnable CLS token to the entire sequence of decoded latents. The whole sequence is refined by a self-attention module, 
         and the final CLS token is used for classification. 
         """

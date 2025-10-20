@@ -140,7 +140,7 @@ def main():
     conf.add_argument("--data_size", type=int, nargs=2, default=(224, 224), help="Image size (height, width)")
     conf.add_argument("--gpu", type=int, default=None, help="GPU device ID (if available)")
     conf.add_argument("--clip_type", type=str, default='RN50', help="CLIP model type")
-    conf.add_argument("--model_type", type=str, required=True, help="Model type (e.g., TemporalCLIPLatentClassifier or CLipClassifierWMapV6)")
+    conf.add_argument("--model_type", type=str, required=True, help="Model type (e.g., LatentTrajectoryClassifier or CLipClassifierWMapV6)")
     conf.add_argument(
         "--tracked_timesteps",
         type=json.loads,
@@ -164,7 +164,7 @@ def main():
     
     # Load model
     checkpoint = torch.load(args.checkpoint, map_location=device, weights_only=False)
-    if args.model_type == "TemporalCLIPLatentClassifier":
+    if args.model_type == "LatentTrajectoryClassifier":
         model_latte = getattr(importlib.import_module('model'), args.model_type)(
             num_class=args.num_class, 
             clip_type=args.clip_type, 
@@ -178,7 +178,7 @@ def main():
             positional_embedding_type=args.positional_embedding_type,
             return_clip_global_feats=args.return_clip_global_feats
         )
-    elif args.model_type == "TemporalCLIPLatentClassifierSingleCLS":
+    elif args.model_type == "LatentTrajectoryClassifierSingleCLS":
         model_latte = getattr(importlib.import_module('model'), args.model_type)(
             num_class=args.num_class, 
             clip_type=args.clip_type, 

@@ -11,7 +11,7 @@ from albumentations.pytorch import ToTensorV2
 from transformers import CLIPTokenizer, CLIPTextModel
 from diffusers import AutoencoderKL, UNet2DConditionModel, DDPMScheduler, DDIMScheduler
 
-def extract_temporal_latents(
+def extract_latent_trajectorylatents(
     image_paths,
     label,
     image_size,
@@ -173,7 +173,7 @@ def process_all_categories(args, device, global_rank, world_size):
             for i in range(num_real_chunks):
                 chunk_paths = image_paths[i * args.chunk_size: (i + 1) * args.chunk_size]
 
-                chunk_results = extract_temporal_latents(
+                chunk_results = extract_latent_trajectorylatents(
                     image_paths=chunk_paths,
                     label=label,
                     image_size=args.data_size,

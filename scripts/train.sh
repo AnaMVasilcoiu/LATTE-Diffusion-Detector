@@ -42,7 +42,7 @@ torchrun \
   train.py \
     --latent_dir_train "../GenImage/GenImage/stable_diffusion_v_1_4/latents_train" \
     --latent_dir_validation "../GenImage/GenImage/stable_diffusion_v_1_4/latents_val" \
-    --model_traj "TemporalCLIPLatentClassifier" \
+    --model_traj "LatentTrajectoryClassifier" \
     --clip_type "convnext_base_in22k" \
     --tracked_timesteps "[981, 741, 521, 261, 1]" \
     --isTrain 1 \

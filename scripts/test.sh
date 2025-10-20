@@ -25,7 +25,7 @@ srun python test_models.py \
     --latent_dirs_test "../GenImage/GenImage/ADM/latents_val" "../GenImage/GenImage/BigGAN/latents_val" "../GenImage/GenImage/glide/latents_val" "../GenImage/GenImage/Midjourney/latents_val" "../GenImage/GenImage/stable_diffusion_v_1_4/latents_val" "../GenImage/GenImage/stable_diffusion_v_1_5/latents_val" "../GenImage/GenImage/VQDM/latents_val" "../GenImage/GenImage/wukong/latents_val" \
     --method_names "ADM" "BigGAN" "glide" "Midjourney" "SDV1.4" "SDV1.5" "VQDM" "wukong" \
     --checkpoint "checkpoints/SDV14_convNext_separateProcessing/ACC_best.pth" \
-    --model_type "TemporalCLIPLatentClassifier" \
+    --model_type "LatentTrajectoryClassifier" \
     --clip_type "convnext_base_in22k" \
     --tracked_timesteps "[981, 741, 521, 261, 1]" \
     --exp_name "SDV14_convNext_separateProcessing" \

@@ -184,7 +184,7 @@ if __name__ == '__main__':
     )
 
     # === Model Configuration ===
-    conf.add_argument("--model_type", type=str, required=True, help="Model class name to instantiate (e.g., 'TemporalCLIPLatentClassifier', 'CLipClassifierWMapV6').")
+    conf.add_argument("--model_type", type=str, required=True, help="Model class name to instantiate (e.g., 'LatentTrajectoryClassifier', 'CLipClassifierWMapV6').")
     conf.add_argument("--clip_type", type=str, default='RN50', help="CLIP backbone type to use (e.g., 'RN50', 'ViT-L/14').")
     conf.add_argument("--checkpoint", type=str, required=True, help="Path to the pretrained model checkpoint (.pth file).")
     conf.add_argument("--num_class", type=int, default=2, help="Number of output classes (default: 2 for binary classification).")
@@ -245,7 +245,7 @@ if __name__ == '__main__':
             num_timesteps=len(args.selected_t_indices), 
         )
     else:
-        if args.model_type == "TemporalCLIPLatentClassifier":
+        if args.model_type == "LatentTrajectoryClassifier":
             model = getattr(importlib.import_module('model'), args.model_type)(
                 num_class=args.num_class, 
                 clip_type=args.clip_type, 
@@ -263,7 +263,7 @@ if __name__ == '__main__':
                 latent_visual_refinement=not args.no_latent_visual_refinement,
                 qkNorm=args.qkNorm
             )
-        elif args.model_type == "TemporalCLIPLatentClassifierSingleCLS":
+        elif args.model_type == "LatentTrajectoryClassifierSingleCLS":
             model = getattr(importlib.import_module('model'), args.model_type)(
                 num_class=args.num_class, 
                 clip_type=args.clip_type, 

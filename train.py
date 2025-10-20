@@ -289,7 +289,7 @@ def main_worker(local_rank, args, output_dir):
             num_timesteps=len(args.selected_t_indices), 
         )
     else:
-        if args.model_type == "TemporalCLIPLatentClassifier":
+        if args.model_type == "LatentTrajectoryClassifier":
             model = getattr(importlib.import_module('model'), args.model_type)(
                 num_class=args.num_class, 
                 clip_type=args.clip_type, 
@@ -308,7 +308,7 @@ def main_worker(local_rank, args, output_dir):
                 prompt_tuning=args.prompt_tuning,
                 qkNorm=args.qkNorm
             )
-        elif args.model_type == "TemporalCLIPLatentClassifierSingleCLS":
+        elif args.model_type == "LatentTrajectoryClassifierSingleCLS":
             model = getattr(importlib.import_module('model'), args.model_type)(
                 num_class=args.num_class, 
                 clip_type=args.clip_type, 
@@ -440,7 +440,7 @@ if __name__ == '__main__':
     conf.add_argument("--out_dir", type=str, default='checkpoints', help="Output directory for checkpoints")
 
     # === Model Configuration ===
-    conf.add_argument("--model_type", type=str, default='TemporalCLIPLatentClassifier', help="Model type")
+    conf.add_argument("--model_type", type=str, default='LatentTrajectoryClassifier', help="Model type")
     conf.add_argument("--clip_type", type=str, default='convnext_base_in22k', help="CLIP variant")
     conf.add_argument("--num_class", type=int, default=2, help='Number of output classes')
     conf.add_argument("--latent_only", action='store_true', help="Use only latent inputs")

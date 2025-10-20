@@ -83,7 +83,7 @@ Train the LATTE classifier on cached latent sequences:
 torchrun --nproc_per_node=4 train.py \
   --latent_dir_train /output/path \
   --latent_dir_validation /validation/path \
-  --model_type "TemporalCLIPLatentClassifier" \
+  --model_type "LatentTrajectoryClassifier" \
   --clip_type "convnext_base_in22k" \
   --epochs 20 \
   --process_latents_separately
@@ -96,14 +96,14 @@ python test.py \
   --checkpoint checkpoints/best_model.pth \
   --latent_dirs_test /path/to/test_chunks_adm /path/to/test_chunks_glide ... \
   --method_names ADM GLIDE ... \
-  --model_type "TemporalCLIPLatentClassifier" \
+  --model_type "LatentTrajectoryClassifier" \
 ```
 
 ```
 python robustness.py \
   --checkpoint checkpoints/best_model.pth \
   --latent_dir /path/to/test_chunks \
-  --model_type "TemporalCLIPLatentClassifier"
+  --model_type "LatentTrajectoryClassifier"
 ```
 
 ## 📊 Benchmarks
